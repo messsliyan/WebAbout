@@ -1,0 +1,152 @@
+导航：
+
+项目：
+object 1（加载bean的方式）
+加载普通beanXML	（ ClassPathXmlApplicationContext）--KnightMain.java
+
+扫描固定包及以下@Componen（@Configuration@+@ComponentScan（basePackages））
+				--SoundSystemConfig.java
+
+加载某个类的bean配置（@ContextConfiguration（classes=）
+				--KnightJavaConfigInjectionTest
+
+自动加载本包xml+aop	--KnightXMLInjectionTest.java+KnightXMLInjectionTest-context.xml
+
+切片编程xml声明	（basePackages）	=39
+
+
+
+object2（自动加载bean的方式）64
+自动扫描bean的xml：<context:component-scan>+测试
+	--soundsystem.xml+CDPlayerXMLConfigTest.java  =65
+
+
+自动加载bean
+@Component+@Autowired+
+@Configuration+@ComponentScan（无参接口）+测试
+		--CDPlayerTest.java+CDPlayerConfig
+
+object4（xml方式配置bean+@Import 是配置合并）80（简单）
+c：_+<list>构造參		cd-config.xml=83
+@Import配置合并		@Import配置合并=93
+
+
+object5（命名空间）
+p_:属性参		PNamespaceRefTest.java+PNamespaceRefTest-context.xml等=88
+util：属性集合	PNamespaceWithUtilNamespaceTest-context.xml	=91
+c_属性参		CNamespaceReferenceTest-context.xml
+
+
+文档：
+39：切片编程xml声明
+42：JdbcTemplate
+64：自动扫描xml+@ComponentScan扫描+自动扫描测试
+83:c-命名空间	xml代替构造参	
+88：p-命名空间	xml代替属性注入
+91：util-命名空间	属性集合注入
+93：配置拆分和合并
+	@Import配置合并+@ImportResource导入xml配置+<import>拆分xml配置
+
+
+
+
+概念：
+
+组件扫描
+如果没有其他配置的话，@ComponentScan默认会扫描与配置类相同的包。
+Spring将会扫描这个包以及这个包下的所有子包，查找带有@Component注解的类
+=<context:component-scan>
+
+@Bean 和@ Component的区别
+component ：  1  利用spring 类路径扫描，
+　　　　　　　　2. 写在类上，和类定义不分离。 
+　　　　　　　　3. 不需要配合 @configuration注解
+Bean ：  当类不受spring控制的时候，写一个方法，返回某个不受spring控制的类的对象。 这样就能在spring里注入一个bean。
+	配合configuration注解
+
+@Component+@Autowired				定义bean
+@Component+@Configuration+@ComponentScan		自动加载扫描bean
+@ContextConfiguration(classes=CDPlayerConfig.class)	使用配置bean
+
+
+<context:component-scan>				自动扫描bean的xml
+@ContextConfiguration(locations="classpath:META-INF/spring/soundsystem.xml")
+						使用自动扫描bean的xml
+
+给bean起别名	@Component（“”）=@Named（“”）
+
+@ComponentScan（“包”）=@ComponentScan（basePackages={“1包”，“2包”}）
+			=扫描为基础包  basePackages复数形式
+
+@Component（ScanbasePackageClasses{“1。class”，“2.class”}）
+			通过指定类来扫描包=这些类所在的包将会作为组件扫描的基础包
+
+自动装配
+@Autowired	required=false可空
+=@Inject注解来源于Java依赖注入规范
+
+自动装配中的歧义性（多个bean都能满足依赖关系）
+
+自己的类使用	组件扫描（component）和自动装配（Autowired）动类结构
+使用第三方时显式装配-Java和XML优先JavaConfig			动配置类
+
+JavaConfig显式配置Spring
+@bean+new 对象			默认情况下，bean的ID与带有@Bean注解的方法名
+或@bean（name=“名字”） 			bean是被对象变为单例模式
+
+xml调用
+@Configuration=需要在配置文件的顶部声明多个XML模式（XSD）
+<beans>=@bean		默认id为oundsystem.SgtPeppers#0（用来计数区分相同类型）
+
+
+
+<constructor-arg ref=“bean。id”> 			构造注入bean
+c-命名空间	=<constructor-arg ref=“bean。id”> =<bean  c:cd-ref="bean.id">
+去掉了<constructor-arg 变为了bean的属性
+
+xml传多参构造 <bean ><constructor-><constructor-> <bean/ >
+string 参数构造<constructor-arg value=">
+c-命名空间	的参数构造
+1、c:_参值=“”
+2、c:_0（第几个参）="
+3、单参c:="
+
+xml传空参构造
+<constructor-arg><null/>
+
+xml装配集合  	c-命名空间	无法实现
+xml传<list>参构造/<set>
+<constructor-arg>
+<list>
+<value>""<value>
+<value>""<value>
+</value>""</value>
+<list>
+<constructor-arg>
+
+xml属性注入
+<property>=@Autowired
+=p-命名空间
+
+-ref=bean引用	否则为字面量（string 字面量=“”）
+
+选择构造器注入还是属性注入呢？
+通用的规则，我倾向于对强依赖使用构造器注入，而对可选性的依赖使用属性注入
+
+util-命名空间
+ 属性装配集合  	创建列表的bean 支持类型
+constant （某个类型的static域）+（list）+（map）+（properties）
++（properties-path）引用一个bean的内嵌属性+set
+
+导入和混合配置
+拆分bean
+@Import（a.class,b.class）	多bean@Configtion合并	
+<import>拆分xml
+@ImportResource导入xml配置
+xml导入javaConfig	<bean class=""@Config类>
+同类的bean会分成两个不同的bean
+
+
+优先级:自动》javabean》xml
+
+高级装配

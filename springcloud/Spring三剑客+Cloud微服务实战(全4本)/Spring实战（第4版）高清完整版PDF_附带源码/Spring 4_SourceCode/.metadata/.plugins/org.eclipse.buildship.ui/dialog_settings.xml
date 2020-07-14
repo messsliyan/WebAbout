@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.buildship.ui.wizard.project.import">
+		<item value="VERSION" key="gradle_distribution_type"/>
+		<item value="" key="gradle_user_home"/>
+		<item value="5.2.1" key="gradle_distribution_configuration"/>
+		<item value="E:\技术资料\springcloud\Spring三剑客+Cloud微服务实战(全4本)\SpringiA4_SourceCode\Chapter_01\knight" key="project_location"/>
+	</section>
+	<section name="org.eclipse.buildship.ui.wizard.project.creation">
+		<item value="LOCAL_INSTALLATION" key="gradle_distribution_type"/>
+		<item value="true" key="use_default_location"/>
+		<item value="D:\RCPeclipse-64\gradle\gradle-6.0" key="gradle_distribution_configuration"/>
+		<item value="E:\技术资料\springcloud\Spring三剑客+Cloud微服务实战(全4本)\Spring实战（第4版）高清完整版PDF_附带源码\Spring 4_SourceCode\project1" key="project_location"/>
+	</section>
+</section>

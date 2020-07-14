@@ -1,0 +1,213 @@
+1、导入--maven-工程
+前提 配置maven 重写setting.xml+首选项maven-2个地方
+2、pom 
+springcloud 使用 Finchley版本对 springboot 的版本依赖是 2.0.3.RELEASE
+
+
+新建springboot项目的过程
+
+使用github
+1、右键项目->Team->Share Project 
+2、点击一下 Use or create repository in parent folder of project 
+3、选择所有文件 commit
+4、git reposirories视图中 右键 push Branch master
+5、输入URI+Store in Secure Store+:master 
+
+MAVEN父子-聚合项目 
+1、创建父项目 
+Create a simple project+<packaging>pom+ hutool <dependencies>+Maven->Update Project+去src
+2、 module+Craete a simple project ( 非必须 )+TestHutool （测试）
+
+public class TestHutool {
+    public static void main(String[] args) {
+        String dateStr = "2012-12-12 12:12:12";
+        Date date = DateUtil.parse(dateStr);
+        System.out.println(date);
+    }
+}
+ 
+检查依赖IDE
+安装新软件（m2e extensions）
+http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-mavenarchiver/0.17.2/N/LATEST/ 
+
+
+
+
+
+子项目 eureka-server 注册中心
+module+ spring-cloud-starter-netflix-eureka-server jar 依赖+EurekaServerApplication 
+
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServerApplication {
+    public static void main(String[] args) {
+        //8761 这个端口是默认的，就不要修改了，后面的子项目，都会访问这个端口。
+        int port = 8761;
+        if(!NetUtil.isUsableLocalPort(port)) {
+            System.err.printf("端口%d被占用了，无法启动%n", port );
+            System.exit(1);
+        }
+        new SpringApplicationBuilder(EurekaServerApplication.class).properties("server.port=" + port).run(args);
+    }
+}
+
++application.yml
+
+eureka: #配置对象
+ eureka: #配置对象
+  instance:
+    hostname: 172.16.125.100 # 表示主机名称(ip或者localhost)
+  client:
+    registerWithEureka: false   # 表示是否注册到服务器。 因为它本身就是服务器，所以就无需把自己注册到服务器了
+    fetchRegistry: false         # 表示是否获取服务器的注册信息，和上面同理，这里也设置为 false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      #${server.port}/eureka/ 自己作为服务器，公布出来的地址。 
+      #比如后续某个微服务要把自己注册到 eureka server, 那么就要使用这个地址： http://springcloud:8761/eureka/
+
+spring:
+  application:
+    name: eureka-server   #表示这个微服务本身的名称是 eureka-server
+
+spring:
+  application:
+    name: eureka-server   #表示这个微服务本身的名称是 eureka-server
+
+启动+访问http://127.0.0.1:8761/
+Instances currently registered with Eureka， 可以发现信息是：No instances available表示 暂时还没有微服务注册进来。
+
+
+
+
+子项目data-service数据微服务
+spring-cloud-starter-netflix-eureka-client (表示这是个 eureka 客户端) jar 依赖
++spring-boot-starter-web: 表示这是个web服务，会提供控制层
++实体类 +服务类 
++ProductDataServiceApplication 
++application.yml （不能有多余的空格）
+
+（重点：springboot的application类 需要放在实体类 +服务类 上层）==访问不到==不要建application立包
+
+内容不写+后面放在一个文件夹中
+
+
+客户端负载均衡
+Ribbon
+3包
+spring-cloud-starter-netflix-eureka-client: eureka 客户端
+spring-boot-starter-web： springmvc
+spring-boot-starter-thymeleaf： thymeleaf 做服务端渲染
++实体类 + ProductClientRibbon （@Component装载）
++服务类 +控制器 +.html 
++ProductViewServiceRibbonApplication==@EnableDiscoveryClient
++application.yml （配置eureka server + thymeleaf）
++访问http://127.0.0.1:8010/products
+
+Feign
+1、包 其他同上
+spring-cloud-starter-openfeign
++实体类 +
+Feign 客户端 
++服务类 +  控制器 +.html   
++ProductViewServiceFeignApplication== @EnableFeignClients
++application.yml 
+
+
+数据服务链追踪
+图片识别调用关系
+1、下载zipkin-server-2.10.1-exec.jar
+2、改造data-service+view-service 
++ zipkin 的jar包。
++配置文件application.yml 
+spring:
+  zipkin:
+    base-url: http://localhost:9411
++启动类		配置 Sampler 抽样策略
+@Bean
+public Sampler defaultSampler() {
+	return Sampler.ALWAYS_SAMPLE;
+}  
++运行 zipkin-server-2.10.1-exec.jar 
+https://blog.csdn.net/firestarwolf/article/details/88720093
+java -jar zipkin-server-2.10.1-exec.jar
+访问 http://localhost:9411/zipkin/dependency/ 
+
+配置服务器中心+更新视图版本
+服务器
+前提：自己的github库+资源文件+所有的目录+分支
+1、spring-cloud-config-server 
+2、ConfigServerApplication 
+3、application.yml   顶   
+客户端公用配置
+1、spring-cloud-starter-config 
+2、bootstrap.yml 
+3、Controller+@Value("${version}")==版本属性+.html 显示
+
+@Value("${version}")报错
+注意配置项spring:
+  application:
+    name:  springcloud-view-service-ribbon==springcloud-view-service-ribbon-dev.properties
+（注：识别空格）
+
+消息总线bus
+实时刷新配置的
+rabbitMQ （消息广播）
+
+网关zuul
+固定地址和端口
+新项目（都通过这个项目来访问别的 避免其他项目的地址和端口发生变化）
+1、spring-cloud-starter-netflix-zuul
+2、@EnableZuulProxy 
+3、路由映射
+
+通过http://localhost:8040/（映射path）api-view/products
+zuul:
+  routes:
+    api-a:
+      path: /api-data/**
+      serviceId: PRODUCT-DATA-SERVICE
+    api-b:
+      path: /api-view/**
+      serviceId: PRODUCT-VIEW-SERVICE-FEIGN
+
+E:\技术资料\springcloud\Spring三剑客+Cloud微服务实战(全4本)
+spring实战（第四版）
+1、DI+AOP Spring生态
+2、DI+bean的装配（xml+java+自动）
+3、高级装配技术
+4、AOP解耦（横切性）
+
+
+5、Spring MVC后台
+6、视图技术（jsp，Thymeleaf，Apache Tiles）
+7、自定义SpringMVC配置、
+处理multipart类型的文件上传、
+处理在控制器中可能会出现的异常
+会通过flash属性在请求之间传递数据
+8、SpringWebFlow（开发会话式的Web应用程序）
+9、SpringSecurity为自己的应用程序Web层实现安全性
+
+10、Spring对JDBC的抽象实现关系型数据库中的数据持久化。
+11、Java持久化API（JPA）存储关系型数据库中的数据。
+12、Spring与非关系型数据库结合使用，如MongoDB和Neo4j
+13、Spring对声明式缓存的支持
+14、SpringSecurity，将会介绍如何通过AOP将安全性应用到方法级别
+
+15、创建与使用远程服务，包括RMI、Hessian、Burlap以及基于SOAP的服务
+16、创建RESTful服务
+17、Spring对异步消息的支持
+18、Spring与WebSocket和STOMP结合起来，实现服务端与客户端之间的异步通信
+19、使用Spring发送E-mail
+20、Spring对Java管理扩展（MX）功能的支持，借助这项功能可以对Spring应用程序进行监控和修改运行时配置
+21、SpringBoot
+
+四种理念
+基于POJO的轻量级和最小侵入性编程；
+通过依赖注入和面向接口实现松耦合；
+基于切面和惯例进行声明式编程；
+通过切面和模板减少样板式代码。
+
+
+装载b的过程
+
+
