@@ -1,0 +1,2268 @@
+1 文件上传
+
+2文件下载
+
+
+
+java基础 
+
+概念  变量
+
+
+给基本类型的变量赋值的方式叫做 字面值
+
+long数字
+1、当以l或者L结尾的时候，一个整数字面值是long类型，否则就是int类型。		 建议使用大写的L
+
+	十进制: 基 10, 包含从0-9的数字，平常用的就是这种
+	十六进制: 基 16, 包含从0-9的数字，和从A-F的字母。
+	八进制: 基 8, 包含从0-7的数字
+	二进制: 基 2, 包含0和1。（从 JAVA7开始就可以创建 二进制的字面值了）
+
+
+
+概念  命名
+
+1、$ _ 可用
+2、关键字。不能直接用来作为变量名
+
+概念 final
+
+final修饰的时候，该变量只有一次赋值的机会
+
+概念 表达式
+以;结尾的一段代码，即为一个表达式
+
+概念 块
+从{ 开始 到对应的} 结束，即一个块
+
+基本操作符
++ - * / %     ++ -- 自增 自减 
+
+关系操作符:比较两个变量之间的关系 
+> 大于 
+>= 大于或等于 
+< 小于 
+<= 小于或等于 
+== 是否相等 
+!= 是否不等 
+
+
+逻辑运算符
+
+&
+&&	长路与 和 短路与	
+|
+||	长路或 和 短路或				
+!	取反							非
+
+^	异或^
+
+长路与 两侧，都会被运算
+短路与 只要第一个是false，第二个就不进行运算了
+
+
+位操作符在实际工作中用的并不常见
+
+三元操作符 
+?:
+
+表达式?值1:值2
+如果表达式为真 返回值1
+如果表达式为假 返回值2
+
+控制流程
+
+continue 
+
+继续下一次循环
+
+break 结束循环
+
+
+数组arrays
+Arrays是针对数组的工具类，可以进行 排序，查找，复制填充等功能。 大大提高了开发人员的工作效率。
+
+copyOfRange 与使用System.arraycopy进行数组复制类似的， Arrays提供了一个copyOfRange方法进行数组复制。
+
+toString()
+如果要打印一个数组的内容，就需要通过for循环来挨个遍历，逐一打印
+但是Arrays提供了一个toString()方法，直接把一个数组，转换为字符串，这样方便观察数组的内容
+
+sort
+Arrays工具类提供了一个sort方法，只需要一行代码即可完成排序功能。
+
+binarySearch 查询元素出现的位置
+需要注意的是，使用binarySearch进行查找之前，必须使用sort进行排序
+
+equals（）	比较两个数组的内容是否一样
+
+fill（)
+使用同一个值，填充整个数组
+
+
+
+类方法： 又叫做静态方法 
+
+对象方法： 又叫实例方法，非静态方法 
+
+访问一个对象方法，必须建立在有一个对象的前提的基础上 
+访问类方法，不需要对象的存在，直接就访问
+
+
+初始化
+对象属性初始化有3种
+1. 声明该属性的时候初始化 
+2. 构造方法中初始化
+3. 初始化块         {  }
+
+类属性初始化有2种
+1. 声明该属性的时候初始化
+2. 静态初始化块    static{  }
+
+静态导入 	类变量
+import static 常量=类.常量
+
+
+
+单例模式 
+单例模式又叫做 Singleton模式，指的是一个类，在一个JVM里，只有一个实例存在。
+
+饿汉式单例模式	通过私有化其构造方法，使得外部无法通过new 得到新的实例			类对象				默认有一个
+
+ 懒汉式单例模式  调用getInstance的时候，才会创建实例					类方法  方法中new自己		用时候存在 只有一个
+
+
+
+什么是单例模式？
+ 
+
+回答的时候，要答到三元素
+1. 构造方法私有化
+2. 静态属性指向实例
+3. public static的 getInstance方法，返回第二步的静态属性
+
+
+枚举类型
+枚举enum是一种特殊的类(还是类)，使用枚举可以很方便的定义常量
+	一个常用的场合就是switch语句中，使用枚举来进行判断
+Season season = Season.SPRING;
+        switch (season)
+
+遍历枚举	 for (Season s : Season.values()) {
+
+
+接口
+接口就像是一种约定，我们约定某些英雄是物理系英雄，那么他们就一定能够进行物理攻击。  （必须实现）
+
+字符串 如果+号两侧都是整型，那么+代表 数字相加
+如果+号两侧，任意一个是字符串，那么+代表字符串连接
+
+
+多态: 都是同一个类型，调用同一个方法，却能呈现不同的状态
+	同一接口 +不同覆盖
+
+object 类
+toString()的意思是返回当前对象的字符串表达
+finalize() 当它被垃圾回收的时候，它的finalize() 方法就会被调用。    
+ 没有引用指向 对象，就满足垃圾回收的条件 垃圾堆积的比较多的时候，就会触发垃圾回收
+
+equals() 用于判断两个对象的内容是否相同
+== 	非Object的方法，但是用于判断两个对象是否相同
+	更准确的讲，用于判断两个引用，是否指向了同一个对象
+
+getClass()会返回一个对象的类对象，属于高级内容，不适合初学者过早接触，关于类对象的详细内容请参考反射机制
+Object还提供线程同步相关方法
+wait()
+notify()
+notifyAll()
+这部分内容的理解需要建立在对线程安全有足够的理解的基础之上，所以会放在线程交互 的章节讲解
+
+hashCode方法返回一个对象的哈希值，但是在了解哈希值的意义之前，讲解这个方法没有意义。
+hashCode的意义，将放在hashcode 原理章节讲解
+
+final  类不可被继承 方法不可被重写	变量，表示该变量只有一次赋值机会 
+
+ static final 常量公开，直接访问，不会变化的值 
+
+abstract类 在类中声明一个方法，这个方法没有实现体，是一个“空”方法 
+这样的方法就叫抽象方法，使用修饰符“abstract" 
+当一个类有抽象方法的时候，该类必须被声明为抽象类  必须实现
+抽象类，就不能够被直接实例化
+
+内部类分为四种： new 外部类.静态内部类();		
+非静态内部类 	只有一个外部类对象存在的时候，才有意义        	属性和方法平等的位置
+静态内部类 	不需要一个外部类的实例为基础，可以直接实例化	属性和方法平等的位置
+匿名类 		new Hero(){ public void attack() {	没有class命名
+                System.out.println("新的进攻手段");		直接声明
+            }
+本地类		有class命					直接声明
+
+在匿名类中使用外部的局部变量，外部的局部变量必须修饰为final   比如监视器
+
+
+
+数字
+封装类	基本类型，都有对应的类类型 Number
+基本类型转封装类	new Integer(int);
+封装类转基本类型 	Integer.intValue();
+自动装箱    =符号自动把 基本类型 转换为 类类型 就叫装箱
+自动拆箱	=就自动转换成int类型，就叫拆箱
+int的最大值，最小值 Integer.MAX_VALUE	Integer.MIN_VALUE
+
+
+Math提供了一些常用的数学运算方法
+
+//5.4四舍五入即5
+        System.out.println(Math.round(f1));
+        //5.5四舍五入即6
+        System.out.println(Math.round(f2));
+         
+        //得到一个0-1之间的随机浮点数（取不到1）
+        System.out.println(Math.random());
+         
+        //得到一个0-10之间的随机整数 （取不到10）
+        System.out.println((int)( Math.random()*10));
+        //开方
+        System.out.println(Math.sqrt(9));
+        //次方（2的4次方）
+        System.out.println(Math.pow(2,4));
+         
+        //π
+        System.out.println(Math.PI);
+         
+        //自然常数
+        System.out.println(Math.E);
+
+
+字符串
+	格式化输出
+	 String sentenceFormat ="%s 在进行了连续 %d 次击杀后，获得了 %s 的称号%n";
+        System.out.printf(sentenceFormat,name,kill,title);
+%s 表示字符串
+%d 表示数字
+%n 表示换行
+	printf和format能够达到一模一样的效果，
+
+换行符就是另起一行 --- '\n' 换行（newline）
+回车符就是回到一行的开头 --- '\r' 回车（return）
+
+
+不同的操作系统，换行符是不一样的
+（1）在DOS和Windows中，每行结尾是 “\r\n”；
+（2）Linux系统里，每行结尾只有 “\n”；
+（3）Mac系统里，每行结尾是只有 "\r"。
+为了使得同一个java程序的换行符在所有的操作系统中都有一样的表现，使用%n，就可以做到平台无关的换行
+
+数字和日期
+ //直接打印数字
+        System.out.format("%d%n",year);
+        //总长度是8,默认右对齐
+        System.out.format("%8d%n",year);
+        //总长度是8,左对齐
+        System.out.format("%-8d%n",year);
+        //总长度是8,不够补0
+        System.out.format("%08d%n",year);
+        //千位分隔符
+        System.out.format("%,8d%n",year*10000);
+  
+        //小数点位数
+        System.out.format("%.2f%n",Math.PI);
+          
+        //不同国家的千位分隔符
+        System.out.format(Locale.FRANCE,"%,.2f%n",Math.PI*10000);
+        System.out.format(Locale.US,"%,.2f%n",Math.PI*10000);
+        System.out.format(Locale.UK,"%,.2f%n",Math.PI*10000);
+
+CHaracter 方法
+ 	System.out.println(Character.isLetter('a'));//判断是否为字母
+        System.out.println(Character.isDigit('a')); //判断是否为数字
+        System.out.println(Character.isWhitespace(' ')); //是否是空白
+        System.out.println(Character.isUpperCase('a')); //是否是大写
+        System.out.println(Character.isLowerCase('a')); //是否是小写
+         
+charAt	获取字符	
+toCharArray	获取对应的字符数组	
+subString	截取子字符串	
+split	分隔	
+trim	去掉首尾空格	
+toLowerCase
+toUpperCase	大小写	
+indexOf
+lastIndexOf
+contains	定位	
+replaceAll 
+replaceFirst	替换
+
+转义字符 
+
+	自动对齐	\\t制表符 长度是8
+
+	换行符 	\\n	单引号 \' 双引号 \\"\
+
+String.length()  字符串长度
+
+
+StringBuffer是可变长的字符串
+
+append delete insert reverse	追加 删除 插入 反转	
+length capacity	长度 容量
+
+
+日期
+
+时间原点	1970年1月1日 8点0分0秒 
+getTime()  得到一个long型的整数
+这个整数代表 从1970.1.1 08:00:00:000 开始 每经历一毫秒，增加1
+new Date().getTime() 和 System.currentTimeMillis() 是一样的
+
+
+format	日期转字符串	
+parse	字符串转日期
+
+日期转字符串 
+y 代表年
+M 代表月
+d 代表日
+H 代表24进制的小时
+h 代表12进制的小时
+m 代表分钟
+s 代表秒
+
+SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS" );
+Date d= new Date();
+String str = sdf.format(d);
+不一样就会抛出解析异常ParseException
+String str = "2016/1/5 12:12:12";
+ry {
+            Date d = sdf.parse(str);
+            System.out.printf("字符串 %s 通过格式  yyyy/MM/dd HH:mm:ss %n转换为日期对象: %s",str,d.toString());
+
+
+日历		Calendar类即日历类，常用于进行“翻日历”，比如下个月的今天是多久
+	采用单例模式获取日历对象Calendar.getInstance();
+
+//通过日历对象得到日期对象	 Date d = c.getTime();
+		Calendar.setTime(Date ); 
+
+c.add(Calendar.MONTH, 1); 下个月的今天
+
+自定义异常 
+
+ extends Exception创建时候抛出             			类
+
+ throws EnemyHeroIsDeadException  引用之后抛出			方法
+
+
+文件流
+
+ 关闭流   把流定义在try()里,try,catch或者finally结束的时候，会自动关闭    JDK7以上
+ 		 try (FileInputStream fis = new FileInputStream(f)) {
+
+编码 
+
+	Java采用的是Unicode 万国码
+
+	String(byte[] bytes, String charsetName)
+
+	byte[] bs = str.getBytes(encode);
+
+
+
+
+缓存流	(每一次的读取，都是在缓存中访问)  
+
+ // 缓存流必须建立在一个存在的流的基础上
+	字节流和字符流的弊端： 
+	在每一次读写的时候，都会访问硬盘。 如果读写的频率比较高的时候，其性能表现不佳。 
+
+1、 				可以一次读取一行数据 BufferedReader.readLine();
+2、PrintWriter			 缓存字符输出流， 可以一次写出一行数据
+3、flush  		 立即把数据写入到硬盘，而不是等缓存满了才写出去。 
+
+DataInputStream  数据输入流 
+DataInputStream 读取一个文件，这个文件必须是由DataOutputStream 写出的
+
+
+序列化   一个对象以流的形式进行传输       类出 +类入
+	 该对象所对应的类，必须是实现Serializable接口
+
+
+
+线程
+
+主线程等待子线程完成
+https://blog.csdn.net/chenyao1994/article/details/83037262
+1.	sleep
+2.join()
+3.等待多线程完成的CountDownLatch
+4.同步屏障CyclicBarrier
+
+
+集合
+
+arrylist 
+
+add	增加	
+contains	判断是否存在	
+get	获取指定位置的对象	
+indexOf	获取对象所处的位置	
+remove	删除	
+set	替换	
+size	获取大小	
+toArray	转换为数组	
+addAll	把另一个容器所有对象都加进来	
+clear	清空
+
+泛型 
+不指定泛型的容器，可以存放任何类型的元素
+指定了泛型的容器，只能存放指定类型的元素以及其子类
+
+遍历
+for	用for循环遍历	
+iterator	迭代器遍历	
+for:	用增强型for循环
+
+
+
+序列分先进先出FIFO,先进后出FILO 
+FIFO在Java中又叫Queue 队列 
+FILO在Java中又叫Stack 栈
+
+二叉树遍历
+二叉树的遍历分左序，中序，右序
+左序即： 中间的数遍历后放在左边
+中序即： 中间的数遍历后放在中间
+右序即： 中间的数遍历后放在右边
+
+HashMap的键值对		键不能重复，值可以重复
+
+HashSet： 无序
+LinkedHashSet： 按照插入顺序		LinkedHashSet的既不重复，又有顺序的特
+TreeSet： 从小到大排序
+
+ArrayList: 有顺序
+HashSet: 无顺序
+
+List中的数据可以重复
+Set中的数据不能够重复
+
+HashMap和Hashtable都实现了Map接口，都是键值对保存数据的方式
+区别1： 
+HashMap可以存放 null
+Hashtable不能存放null
+区别2：
+HashMap不是线程安全的类
+Hashtable是线程安全的类
+
+
+
+ArrayList 插入，删除数据慢
+LinkedList， 插入，删除数据快
+ArrayList是顺序结构，所以定位很快，指哪找哪。 就像电影院位置一样，有了电影票，一下就找到位置了。
+LinkedList 是链表结构，就像手里的一串佛珠，要找出第99个佛珠，必须得一个一个的数过去，所以定位慢
+
+定位快 和插入快
+
+
+Collections是一个类，容器的工具类,就如同Arrays是数组的工具类
+synchronizedList 把非线程安全的List转换为线程安全的List。
+reverse	反转	
+shuffle	混淆	
+sort	排序	
+swap	交换	
+rotate	滚动	
+
+HashMap进行反转，key变成value,value变成key
+
+HashMap原理与字典 有索引
+
+
+compatror《物体》=new==
+Comparable 比较器  implemt+ Collections.sort(heros);
+大返回一 小返回负一
+
+聚合操作  lamba表达式
+
+泛型   避免强转错误
+
+extends 
+ 	泛型通配符ArrayList heroList<? extends Hero> 表示这是一个Hero泛型或者其子类泛型
+heroList 的泛型可能是Hero
+heroList 的泛型可能是APHero
+
+super 
+
+heroList的泛型可能是Hero
+heroList的泛型可能是Object
+
+？
+泛型通配符? 代表任意泛型
+既然?代表任意泛型，那么换句话说，这个容器什么泛型都有可能
+
+所以只能以Object的形式取出来
+并且不能往里面放对象，因为不知道到底是一个什么泛型的容器
+ArrayList heroList<? super Hero> 表示这是一个Hero泛型或者其父类泛型
+
+泛型强转   //子类泛型转父类泛型  
+子类泛型不可以转换为父类泛型
+
+lambda 表达式 java 1.8 
+=匿名类（类中的新建+接口实现类）
+
+匿名内部类
+ filter(heros, h->h.hp>100 && h.damage<50);
+
+h（接口的参）—》（符号）实现表达式；
+
+本身静态方法
+filter(heros, h -> TestLambda.testHero(h) );
+ 改写为：
+filter(heros, TestLambda::testHero);
+
+引用对象方法
+
+
+TestLambda testLambda = new TestLambda();
+filter(heros, testLambda::testHero);
+
+
+容器中的对象的方法
+在Lambda表达式中调用容器中的对象Hero的方法matched
+filter(heros,h-> h.matched() );
+进一步改写为
+
+filter(heros, Hero::matched);
+
+（静态类/对象/容器）：：（方法）
+
+
+ 引用构造器（返回一个new）				单纯的需要一个new对象时候
+()->new ArrayList()     ===ArrayList::new
+
+Stream   和Collection结构化的数据不一样，Stream是一系列的元素，就像是生产线上的罐头一样一串串的出来
+
+管道指的是一系列的聚合操作
+
+管道源：在这个例子里，源是一个List
+中间操作： 每个中间操作，又会返回一个Stream，比如.filter()又返回一个Stream, 中间操作是“懒”操作，并不会真正进行遍历。
+结束操作：当这个操作执行后，流就被使用“光”了，无法再被操作。所以这必定是流的最后一个操作。 结束操作不会返回Stream，
+但是会返回int、float、String、 Collection或者像forEach，什么都不返回, 结束操作才进行真正的遍历行为，
+在遍历的时候，才会去进行中间操作的相关判断
+
+
+线程
+
+Thread.sleep(1000);----主线程通知
+
+多线程 1、线程类  ---thread.start();
+		
+		  Runnable（ new Thread(this).start();）
+
+	注意哦: 对象实现了Runnable接口，所以有run方法，但是直接调用run方法，并不会启动一个新的线程。
+
+     //匿名类中用到外部的局部变量teemo，必须把teemo声明为final
+     //但是在JDK7以后，就不是必须加final的了
+
+创建多线程的三种方式
+1. 继承Thread类
+2. 实现Runnable接口
+3. 匿名类的方式
+
+
+
+
+
+
+
+反射机制（类对象得到类的东西）   ----spring 依赖注入+控制反转
+	
+类对象:class =          描述类的东西
+1	Class.forName(类名)		jdbc中初始化
+2	类名.class
+3	new 类名().getclass();
+
+注意 会初始化
+
+创建对象
+//构造器
+            Constructor c= pClass.getConstructor();
+            //通过构造器实例化
+            Hero h2= (Hero) c.newInstance();
+
+应用
+1、config 中 设置类名 根据类名使用对象 				配置文件
+
+
+修改字段
+ 		//获取类Hero的名字叫做name的字段
+                Field f1= h.getClass().getDeclaredField("name");
+                //修改这个字段的值
+                f1.set(h, "teemo");
+
+
+
+调用方法
+ 	  // 获取这个名字叫做setName，参数类型是String的方法
+            Method m = h.getClass().getMethod("setName", String.class);
+            // 对h对象，调用这个方法
+            m.invoke(h, "盖伦");
+
+应用：配置文件调用方法
+
+实际应用
+
+业务（不同类 不同方法）+配置文件
+好处：改配置文件 不改代码
+
+
+class=reflection.Service1
+method=doService1
++
+//从spring.txt中获取类名称和方法名称
+        File springConfigFile = new File("e:\\project\\j2se\\src\\spring.txt");
+        Properties springConfig= new Properties();
+        springConfig.load(new FileInputStream(springConfigFile));
+        String className = (String) springConfig.get("class");
+        String methodName = (String) springConfig.get("method");
+         
+        //根据类名称获取类对象
+        Class clazz = Class.forName(className);
+        //根据方法名称，获取方法对象
+        Method m = clazz.getMethod(methodName);
+        //获取构造器
+        Constructor c = clazz.getConstructor();
+        //根据构造器，实例化出对象
+        Object service = c.newInstance();
+        //调用对象的指定方法
+        m.invoke(service);
+
+
+注解	annotation
+	
+@Override 		如果父类没有这个方法，那么就无法编译通过
+@Deprecated		被注解为过期，在调用的时候，就会受到提示
+@SuppressWarnings	忽略警告信息
+@SuppressWarnings 有常见的值，分别对应如下意思
+
+@SuppressWarnings({ "rawtypes", "unused" })
+1.deprecation：使用了不赞成使用的类或方法时的警告(使用@Deprecated使得编译器产生的警告)；
+2.unchecked：执行了未检查的转换时的警告，例如当使用集合时没有用泛型 (Generics) 来指定集合保存的类型; 关闭编译器警告
+3.fallthrough：当 Switch 程序块直接通往下一种情况而没有 Break 时的警告;
+4.path：在类路径、源文件路径等中有不存在的路径时的警告;
+5.serial：当在可序列化的类上缺少 serialVersionUID 定义时的警告;
+6.finally：任何 finally 子句不能正常完成时的警告;
+7.rawtypes 泛型类型未指明
+8.unused 引用定义了，但是没有被使用
+9.all：关于以上所有情况的警告。
+
+@FunctionalInterface	约定函数式接口
+函数式接口：接口中一个抽象方法    ---可用Lambda 表达式
+
+
+
+自定义注解
+
+
+
+1、@interface
+
+2、+元注解		 meta annotation用于注解 自定义注解 的注解。
+@Target({METHOD,TYPE}) 				注解可以用的位置
+@Retention(RetentionPolicy.RUNTIME) 		运行时注解，即运行起来之后，才获取注解中的相关信息，而不像基本注解如@Override 那种不用运行，在编译时eclipse就可以进行相关工作的编译时注解。
+@Inherited 					可以被子类继承
+@Documented 			表示当执行javadoc的时候，本注解会生成相关文档
+
+3、注解元素，		这些注解元素就用于存放注解信息，在解析的时候获取出来
+
+@Target({METHOD,TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Documented
+public @interface JDBCConfig {
+     String ip();
+     int port() default 3306;
+     String database();
+     String encoding();
+     String loginName();
+     String password();
+}
+
+4 子类 使用
+@JDBCConfig(ip = "127.0.0.1", database = "test", encoding = "UTF-8", loginName = "root", password = "admin")
++调用字段
+ JDBCConfig（父类） config = DBUtil（子类）.class.getAnnotation(JDBCConfig（父类）.class);
+
+结果 子类继承父类字段 并且初始化了    ==继承了接口
+
+@Target是：
+@Target({METHOD,TYPE})，表示他可以用在方法和类型上（类和接口），但是不能放在属性等其他位置。 可以选择的位置列表如下：
+ElementType.TYPE：能修饰类、接口或枚举类型
+ElementType.FIELD：能修饰成员变量
+ElementType.METHOD：能修饰方法
+ElementType.PARAMETER：能修饰参数
+ElementType.CONSTRUCTOR：能修饰构造器
+ElementType.LOCAL_VARIABLE：能修饰局部变量
+ElementType.ANNOTATION_TYPE：能修饰注解
+ElementType.PACKAGE：能修饰包
+
+@Retention可选的值有3个：
+RetentionPolicy.SOURCE： 注解只在源代码中存在，编译成class之后，就没了。@Override 就是这种注解。
+RetentionPolicy.CLASS： 注解在java文件编程成.class文件后，依然存在，但是运行起来后就没了。@Retention的默认值，即当没有显式指定@Retention的时候，就会是这种类型。
+RetentionPolicy.RUNTIME： 注解在运行起来之后依然存在，程序可以通过反射获取这些信息，自定义注解@JDBCConfig 就是这样。
+大家可以试试把自定义注解@JDBCConfig的@Retention改成其他两种，并且运行起来，看看有什么不同
+
+@Documented  在用javadoc命令生成API文档后，DBUtil的文档里会出现该注解说明。
+注： 使用eclipse把项目中的.java文件导成API文档步骤：
+1. 选中项目
+2. 点开菜单File
+3. 点击Export
+4. 点开java->javadoc->点next
+5. 点finish
+
+使用@Repeatable之后，再配合一些其他动作，就可以在同一个地方使用多次了。
+@JDBCConfig(ip = "127.0.0.1", database = "test", encoding = "UTF-8", loginName = "root", password = "admin")
+@JDBCConfig(ip = "127.0.0.1", database = "test", encoding = "UTF-8", loginName = "root", password = "admin")
+
+
+spring
+
+IOC 反转控制 是Spring的基础，Inversion Of Control 
+		创建对象		自己new =Spring创建对象 
+DI 依赖注入 Dependency Inject. 
+		拿到的对象的属性被注入好相关值了，直接使用即可。 
+
+AOP 即 Aspect Oriented Program 面向切面编程 
+首先，在面向切面编程的思想里面，把功能分为核心业务功能，和周边功能。 
+所谓的核心业务，比如登陆，增加数据，删除数据都叫核心业务 
+所谓的周边功能，比如性能统计，日志，事务管理等等 
+
+周边功能在Spring的面向切面编程AOP思想里，即被定义为切面 
+
+在面向切面编程AOP的思想里面，核心业务功能和切面功能分别独立进行开发 
+然后把切面功能和核心业务功能 "编织" 在一起，这就叫AOP
+
+
+线程
+
+jion 加入到主（当前）线程中去
+
+Priority  优先级（高者多）
+
+setDaemon 守护线程 最低优先级 用来 性能停止和日志等
+当一个进程里，所有的线程都是守护线程的时候，结束当前进程。
+
+多线程同步      多线程修改一个数据
+synchronized(是否独占一个线程){  里面结束则释放}
+方法 synchronized=同步 synchronized（）
+
+线程安全     同时只能被一个线程修改
+所有方法都是synchronized修饰 =同一个实例对象自带同步 
+只能同时被一个线程调用
+
+StringBuffer的方法都是有synchronized修饰的，StringBuffer就叫做线程安全的类
+而StringBuilder就不是线程安全的类
+
+非线程安全转线程安全  =coolections.synchronized（）;
+
+
+死锁  （都在等待资源 可是一直不释放） 无办法 规避
+
+交互  （带条件的运行）
+对象.wait 释放资源并等待(写在synchronized中)  
+对象.notify 唤醒等待一个线程 notifyall通知全部
+
+线程池 （任务和线程分离）
+池中放了一个又一个线程 线程数量固定 任务可换
+https://how2j.cn/k/thread/thread-threadpool/357.html
+java自带的任务池 
+
+
+Lock lock = new ReentrantLock();  类似与synchronized
+与 synchronized  不同的是
+synchronized 块结束， 自动释放对someObject的占用。
+ lock必须调用unlock方法进行手动释放   unlock() 放在finally中进行。
+
+trylock方法 
+trylock会在指定时间范围内试图占用，占成功了，就啪啪啪。 如果时间到了，还占用不成功，扭头就走~
+
+原子性操作 （ 不可中断的操作）线程安全的
+AtomicInteger 包括int类型封装好的的原子操作
+
+
+网络编程
+1.获取本地IP
+2.ping命令  获取可连接的地址
+
+socket 
+1.  收发数字 
+2.收发字符串 
+3.同时收发消息 
+
+swing图形界面编程
+3中线程
+1、ui线程
+2、事件线程
+3、长耗时任务线程（放入线程池）SwingWorker类
+当SwingWorker执行execute的时候，调用默认有10根线程的线程池，执行doInBackground中的代码，通过如下代码，可以获知执行当前SwingWorder的线程名称
+Thread.currentThread().getName())；
+
+Junit测试
+1、导包
+2、@test
+3、结果值) =SumUtil.方法（参数）;
+Assert.assertEquals(结果对象,结果值);
+4、 Run As -> JUnit Test 方式 
+
+@Before @After 也是常见的测试框架注解，
+分别用来在测试开始之前做的事情，和结束之后做的事情
+
+TestSuite  一下执行多个测试类
+
+hutool   工具类
+日期与字符串转换
+文件操作
+转码与反转码
+随机数生成
+压缩与解压
+编码与解码
+CVS文件操作
+缓存处理
+加密解密
+定时任务
+邮件收发
+二维码创建
+FTP 上传与下载
+图形验证码生成
+
+编码工具-16进制工具
+编码工具-转义工具
+编码工具-Hash工具
+编码工具-URL工具
+编码工具-Base32-64工具
+编码工具-Unicode工具
+
+常用类辅助工具-转换工具
+常用类辅助工具-日期工具
+常用类辅助工具-字符串工具
+常用类辅助工具-数字工具
+常用类辅助工具-数组工具
+常用类辅助工具-随机工具
+常用类辅助工具-比较器工具
+常用类辅助工具-多线程工具
+常用类辅助工具-缓存工具
+常用类辅助工具-定时器工具
+
+类和对象-反射工具
+类和对象-类工具
+系统工具-粘贴板工具
+系统工具-运行时工具
+系统工具-系统属性工具
+
+和文件有关的-文件IO工具
+和文件有关的-图片工具
+和文件有关的-CVS工具
+和文件有关的-图形验证码工具
+
+需要第三方的-邮件工具
+需要第三方的-二维码工具
+需要第三方的-FTP工具
+
+其他-网络工具
+其他-压缩工具
+其他-正则工具
+其他-校验工具
+其他-身份证工具 
+
+
+前端：
+
+样式
+BootStrap Twitter的工程师开发的前端框架，可以非常方便的设计出好看的页面效果。
+1、最开头加上   （用到了html5的特性）
+<!DOCTYPE html> 
+2、导入js 导入css 
+3、使用css
+
+简写的js
+Vue.js （简化js和jquery）
+
+客户端写服务器代码
+node.js（ javascript 写的 tomcat ... ）
+
+前端打包
+webpack
+webpack 就把左边的各种各样的静态资源，打包成了一个所谓的 assets. 这样浏览器加载起来就快多了。 
+
+//前端画图 （线形图 树状图）
+ chartjs
+
+J2EE J2EE核心是一组技术规范与指南
+为大企业主机级的计算类型而设计的Java平台
+
+tomcat
+1、改端口 8080
+2、html放入tomcat\webapps\ROOT
+3、启动错误调试
+
+Servlet （HttpServlet ） doPost doget
+创建web应用项目
+File->New->Other-Web->Dynamic Web Project
+servlet-api.jar 
+
+注:ecilpse中默认输出的class是在bin目录下,tomcat到WEB-INF/classes这个目录下去寻找
+把项目的class文件输出由原来的 j2ee/bin 设置到 j2ee/web/WEB-INF/classes下
+
+动态web项目 （可以使用eclipse的tomcat）
+类文件会被输出到build里，而不是WEB-INF/classes目录下
+转化为动态web项目
+右键项目j2ee->properties->Project Facets->Convert to faceted form（构建项面）
+
+
+ 编写servlet代码
+HelloServlet继承了 HttpServlet并且提供了一个doGet方法
+配置web.xml （servlet-mapping）
+
+ 部署到tomcat中
+
+Servlet 获取参数 
+Servlet 返回响应 
+Servlet 调用流程 
+Servlet service() 
+Servlet 中文问题 
+Servlet 生命周期 
+Servlet 跳转 
+Servlet 自启动 
+Servlet request常见方法 
+Servlet response 用法 
+Servlet 上传文件
+ 
+1、Java Project 切换成 Web 动态项目
+2、数据库+servlet项目
+
+
+http协议
+1、浏览器调试台使用（实际观察浏览器和服务器之间传输数据的具体内容 ）
+请求消息 由 请求行，请求头部，空行和请求数据4部分组成 
+响应代码
+200 表示响应成功
+301 表示客户端跳转，永久性的跳转
+302 客户端跳转，临时性的跳转
+304 表示资源未被修改
+404表示访问的页面不存在
+500 表示服务端的错误
+
+jsp（本质是个Servlet ）
+1. 把 hello.jsp转译为hello_jsp.java
+2. hello_jsp.java 位于
+ d:\tomcat\work\Catalina\localhost\_\org\apache\jsp
+3. hello_jsp.java是一个servlet
+4. 把hello_jsp.java 编译为hello_jsp.class
+5. 执行hello_jsp，生成html
+6. 通过http协议把html 响应返回给浏览器 
+
+jsp由这些页面元素组成：
+1. 静态内容
+就是html,css,javascript等内容
+2. 指令
+ 以<%@开始 %> 结尾，比如<%@page import="java.util.*"%>
+3. 表达式 <%=%>
+ 用于输出一段html
+4. Scriptlet
+ 在<%%> 之间，可以写任何java 代码
+5. 声明
+ 在<%!%> 之间可以声明字段或者方法。但是不建议这么做。
+6. 动作
+ <jsp:include page="Filename" > 在jsp页面中包含另一个页面。（实际是访问另一个servlet,有请求和响应）
+7. 注释 <%-- -- %>
+ 不同于 html的注释 <!-- --> 通过jsp的注释，浏览器也看不到相应的代码，相当于在servlet中注释掉了
+
+include （每个网页的最下方都有 版权声明等信息）
+<%@include file="footer.jsp" %> 指令include
+<jsp:include page="footer.jsp" />动作include （涉及到传参问题）
+跳转动作<jsp:forward page="hello.jsp"/>服务端跳转
+
+cookie 服务器端创建 浏览器保存 （一大段大写字母）
+案列：保存密码到当地 一段时间后失效
+
+Session会话	保存数据的方式有点像Map的键值对(key-value)
+浏览器关闭为止，都属于同一个会话
+有效期：在Tomcat默认配置
+
+session和cookie关系
+cooike是唯一钥匙（key） 可以打开seeion柜子(值)
+
+4个作用域
+pageContext 当前页面 
+requestContext 一次请求 
+sessionContext 当前会话 
+applicationContext 全局，所有用户共享 
+
+JSP一共有9个隐式对象，分别是 
+request,response,out 
+pageContext, session,application 
+page,config,exception 
+
+JSTL
+1、jstl.jar 和standard.jar
+2.<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+prefix="c" 表示后续的标签使用都会以<c: 开头
+例子:
+set out输出 remove  作用域
+
+if
+<c:if test=""> 进行条件判断
+empty可以判断对象是否为null,字符串长度是否为0，集合长度是否为0 
+
+<c:if test="!" 来表示else 
+
+if else
+<c:choose> 
+        <c:when test="${hp<5}">
+
+	</c:when>
+	<c:otherwise>
+
+	</c:otherwise>
+</c:choose>
+
+forEach 
+<c:forEach items="${heros}" var="hero" varStatus="st"  >
+    <tr>
+        <td><c:out value="${st.count}" /></td>    ====i
+        <td><c:out value="${hero}" /></td>
+    </tr>
+</c:forEach>
+
+字符串拆分
+forTokens 
+<c:set var="heros" value="塔姆,艾克;巴德|雷克赛!卡莉丝塔" /> 
+
+<c:forTokens items="${heros}" delims=":;|!" var="hero">
+    <c:out value="${hero}" /> <br />
+</c:forTokens>
+
+fmt:formatNumber 格式化数字 
+<fmt:formatNumber 表示格式化数字
+minFractionDigits 小数点至少要有的位数
+maxFractionDigits 小数点最多能有的位数 
+
+fmt:formatDate 格式化日期 
+<fmt:formatDate 表示格式化日期
+
+Date now = new Date();时间戳
+yyyy 表示年份
+MM 表示月份
+dd 表示日期
+E 表示星期几
+
+a 表示是上午还是下午
+HH 表示小时
+mm 表示分钟
+ss 表示秒
+S 表示毫秒
+z 表示时区 
+
+fn: 
+字符串操作
+
+EL表达式
+1、+<%@page 标ELIgnored="false"
+
+<c:out value="${name}" /> =${name}
+
+${hero.name}
+${hero.name} ，就会自动调用getName方法了
+注： 如果属性是boolean类型，那么就会自动调用isXXX方法了 
+
+${param.name}
+request.getParameter("name")
+
+eq 
+${killNumber ge 10? "超神":"还没超神" }
+eq相等 ne、neq不相等，
+gt大于， lt小于
+gt大于， lt小于
+gte、ge大于等于 
+lte、le 小于等于 
+not非 mod求模 
+is [not] div by是否能被某数整除 
+is [not] even是否为偶数 
+is [not] odd是否为奇 
+
+
+
+M（模型dao,bean）V（视图 网页, JSP）C（控制器 Servlet）
+jsp+servlet
+
+servlet  数据库中查询对象+跳转到JSP页面
+
+.jsp: 获取Servlet象，EL表达式把request中的显示出来
+
+组成 bean+dao+selvet+jsp
+
+
+Filter过滤器
+(用户的请求需要经过Filter)
+
+Listener 监听器   监听 web应用（appitation和seeeion等） 的创建和销毁，以及在其上attribute发生的变化。
+
+Thymeleaf 模板语言，=JSP 与springboot 一起用
+
+前后端分离  （Ajax获取“纯数据”纯数据显示html上）
+servlet, springmvc,struts， tomcat —》变java——》变html——到浏览器
+前端部分需要掌握： AJAX和JSON
+前后交互有3种实现： J2EE, SSM 和 Springboot。 
+
+J2EE 方式 指通过 Servlet来做服务端
+SSM 方式 指通过 SpringMVC来做服务端
+Springboot 方式本质上也是通过 SpringMVC来做服务端
+前端   
+Ajax分原生和JQuery两种：原生 Ajax，JQuery中的Ajax
+JSON是数据传输格式： JSON
+
+vue + springboot 
+VUE.JS + RESTFUL + PAGEHELPER + THYMELEAF + SPRINGBOOT 前后端分离 CRUD 
+
+hibernate 
+1、Product.hbm.xml   类Product对应表product_ （bean映射）
+ 使用many-to-one 标签设置多对一关系  
+	(本身是多个	类中有属性多的class)	
+
+
+one-to-many class="Product" /> 表示一对多 
+（本身是一个 	类中有set多的class）
+
+
+多对多 many-to-many 
+（本身是一个多 	类中有set多的class）
+<set name="products" lazy="false"> 获取是延迟加载的
+查询表中表（类中set类）时  使用类中类属性 才会查询 
+
+
+
+对象bean中注解
+@Entity 表示这是一个实体类，用于映射表
+@Table(name = "product_") 表示这是一个类，映射到的表名:product_ 
+
+下面的放在方法上
+@Id 表示这是主键
+@GeneratedValue(strategy = GenerationType.IDENTITY) 表示自增长方式使用mysql自带的
+@Column(name = "id") 表示映射到字段id
+@ManyToOne 表示多对一关系
+@OneToMany 表示一对多,fetch=FetchType.EAGER 表示不进行延迟加载(FetchType.LAZY表示要进行延迟加载)
+@JoinColumn(name="cid") 表示关系字段是cid
+ @JoinTable(
+            name="user_product",===表示二者关系的联表
+            joinColumns=@JoinColumn(name="pid"),===pid对应uid
+            inverseJoinColumns=@JoinColumn(name="uid")
+    )   
+
+
+
+2、hibernate.cfg.xml 	
+配置访问数据库要用到的驱动，url，账号密码等等 
+Product.hbm.xml的路径mapper
+是否显示sql
+
+c3p0连接池（减少数据库连接耗时）
+1.导包
+2.+配置 
+3.去二级缓存（如果类mapper中有）
+
+
+事务（MYSQL 表的类型必须是INNODB才支持事务 ）	在事务中的多个操作行为，要么都成功，要么都失败 
+  s.beginTransaction();	  s.getTransaction().commit();
+
+load和get
+当使用load的方式来获取对象的时候，只有访问了这个对象的属性，hibernate才会到数据库中进行查询。否则不会访问数据库 
+对于id不存在的对象的处理  
+1. get方式会返回null 
+2. load方式会抛出异常 
+
+
+级联
+配置了恰当的级联，那么删除分类的时候，其对应的产品都会被删除掉。 
+all：所有操作都执行级联操作；
+ none：所有操作都不执行级联操作；
+ delete：删除时执行级联操作； 
+ save-update：保存和更新时执行级联操作；
+级联通常用在one-many和many-to-many上，几乎不用在many-one上。 
+
+有一级缓存和二级缓存（在不同地方放了对象 默认是一级）
+在hibernate.cfg.xml中开启二级缓存的配置
+hibernate本身不提供二级缓存，都是使用第三方的二级缓存插件
+这里使用的是 EhCache提供的二级缓存
+
+hibernate的基本步骤是：
+1. 获取SessionFactory 
+2. 通过SessionFactory 获取一个Session
+
+	两种方式获得session 
+	openSession和getCurrentSession 
+	1. 获取的是否是同一个session对象 
+	openSession每次都会得到一个新的Session对象 
+	getCurrentSession在同一个线程中，每次都是获取相同的Session对象，但是在不同的线程中获取的是不同的Session对象 
+	2. 事务提交的必要性 
+	openSession只有在增加，删除，修改的时候需要事务，查询时不需要的 
+	getCurrentSession是所有操作都必须放在事务中进行，并且提交事务后，session就自动关闭，不能够再进行关闭 
+
+
+3. 在Session基础上开启一个事务
+4. 通过调用Session的save方法把对象保存到数据库
+5. 提交事务
+6. 关闭Session
+7. 关闭SessionFactory
+
+HQL（Hibernate Query Language）是hibernate专门用于查询数据的语句
+根据name进行模糊查询   
+Query q =s.createQuery("from Product p where p.name like ?");
+ q.setString(0, "%"+name+"%");
+
+Criteria 
+面向对象的方式在进行数据查询，将不再看到有sql语句的痕迹
+ c.add(Restrictions.like("name", "%"+name+"%"));
+
+功能：Oracle,Mysql,NoSQL还是DB2
+1、使用Criteria进行分页查询 
+c.add(Restrictions.like("name", "%"+name+"%"));
+        c.setFirstResult(2);
+        c.setMaxResults(5);
+
+
+标准sql
+String sql = "select * from product_ p where p.name like '%"+name+"%'";
+ Query q= s.createSQLQuery(sql);
+    List<Object[]> list= q.list();
+
+
+N+1 
+执行一条sql语句，去查询这100条记录，但是，
+N指的是如果在缓存中找不到对应的数据，就到数据库中去查 
+1指 只返回这100条记录的ID （缓存）
+然后再根据id,进行进一步查询。
+方式
+首先通过Query的iterator把所有满足条件的Product的id查出来
+然后再通过it.next()查询每一个对象
+如果这个对象在缓存中，就直接从缓存中取了
+否则就从数据库中获取
+ List<Product> ps= q.list();变Iterator<Product> it= q.iterate();
+
+Hibernate使用乐观锁来处理脏数据问题 （不同两个同时操作一个表）
+<version name="version" column="ver" type="int"></version>
+增加一个version字段，用于版本信息控制。这就是乐观锁的核心机制。
+
+注解（无bean的mapper    bean中加注解）
+hbm.xml文件里的映射信息，现在不用配置文件做了，改由注解来完成 
+1、bean中加注解
+2、  hibernate.cfg.xml 配置文件改动 
+<mapping resource="com/how2java/pojo/Product.hbm.xml" />
+变
+<mapping class="com.how2java.pojo.Product" />
+
+
+Struts2 是基于MVC的WEB框架 
+1、导包到——lib
+2、过滤器给org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter 
+3、src+struts.xml  jsp对应着类 其对象可以直接用EL表达式（类中要有对应的get 和set方法）
+
++通配符*
+ <action name="*Product*" class="com.how2java.action.ProductAction" method="{1}">
+*Product 表示所有以Product结尾的路径，都会匹配在这个Action上  method={1}表示第一个通配符*
++dateInterceptor拦截器
+注：使用时候+默认的拦截器
+
+4、jsp  ${product}+setProduct
+
+功能：
+1、跳转
+服务端跳转 
+返回String add() +return "show";
+ 对应struts.xml中的<result name="show">show.jsp</result>
+客户端跳转 +type="redirect"
+  <result name="addPage" type="redirect">addProduct.jsp</result>
+
+2、中文问题
+	2个编码.jsp  struts.xml 
+3、+log4j.xml 
+4、获取request和response对象     
++传统servlet=HttpSession /Struts中自己定义的Session 
+5、上传文件（比servlet简单很多）可设置文件最大值
+····	1<form action="upload" method="post" enctype="multipart/form-data">
+	2<s:file name="doc" label="upload" />或者 <input type="file" name="doc" />
+		注意:doc=class中的变量名
+	3UploadAction  3属性+getter setter 
+		File doc;	String docFileName;	String docContentType;
+6、自带的标签（<%@ taglib prefix="s" uri="/struts-tags" %>）
+	表单：<s:form action="addProduct">
+		<s:textfield name="product.name" label="product name" />
+		 <s:submit value="Submit" />
+		</s:form>
+	s:iterator=c:forEach
+	<s:checkboxlist 
+	<s:radio 
+	<s:select 
+	s:debug 	action到底有没有传递数据 ?
+
+7、传参
+	1.jsp  value="${param.name}"
+	2.struts.xml 	重定向+?参
+		<result name="addPage" type="redirect">addProduct.jsp?name=${name}</result>
+	3.Actionclasss  +字段name +addPage  name=“值”
+
+8、表单验证（最好不用）
+     类验证1.Actionclasss   extends ActionSupport
+		validate()+addFieldError("显示错误");
+	2.struts.xml  <result name="input">addProduct.jsp</result>
+	3.jsp	<s:head/>	错误提示信息显示成红色
+   xml验证：1.+ProductAction-validation.xml  
+		ProductAction同包+命名{actionname}-validation.xml 
+注 ：每次访问都会建立新的action
+
+9、注解：替换struts.xml中的声明 
+Actionclasss：类头
+	@Namespace("/")		访问路径
+	@ParentPackage("struts-default") 	默认的一套拦截器
+	@Results({@Result(name="show", location="/show.jsp"),
+        		@Result(name="home", location="/index.jsp")})=<result nam
+	方法头
+	@Action("showProduct")
+
+
+spring 
+Inversion Of Control  创建对象不new 由Spring创建对象 
+DI 依赖注入 Dependency Inject.  拿到的对象的属性，被注入好相关值 可直接使用
+
+1、导包
+2、bean
+3、applicationContext.xml  配置bean（已经实例化的一个对象 可以初始化对象）
+
+引用注解：
+1、applicationContext.xml 
++<context:annotation-config/>=<property ref="c" /> 
+2、引用前
++@Autowired  （前提applicationContext.xml 配置好bean） 
+
+@Resource(name="c")	指定需要的bean
+private Category category;
+
+功能
+1、注解配置bean
+	1.applicationContext.xml  +<context:component-scan base-package="com.how2java.pojo"/>
+		bean都放在com.how2java.pojo这个包下 
+	2.bean前
+	@Component("p")+类中初始化
+
+AOP 即 Aspect Oriented Program 面向切面编程
+
+业务+辅助+bean
+
+功能  就是在核心功能生命周期前后干了一些事
+核心业务功能	登陆，增加数据，删除数据	<aop:pointcut 
+周边功能		性能统计，日志，事务管理	被定义为切面 <aop:aspect 
+编织器	<aop:config
+
+1、导包
+2、xml/注解--bean声明+操作声明+AOP声明<aop:config（核心业务<aop:pointcut +周边功能声明<aop:aspect ）
+ 辅助功能和核心业务功能彼此独立进行开发
+	比如登陆功能，即便是没有性能统计和日志输出，也可以正常运行
+	如果有需要，就把"日志输出" 功能和 "登陆" 功能 编织在一起，这样登陆的时候，就可以看到日志输出了
+	辅助功能，又叫做切面，这种能够选择性的，低耦合的把切面和核心业务功能结合在一起的编程思想，就叫做切面编程 
+
+execution(* com.how2java.service.ProductService.*(..)) 解析 
+* 返回任意类型
+com.how2java.service.ProductService.* 包名以 com.how2java.service.ProductService 开头的类的任意方法
+(..)  参数是任意数量和类型 
+
+注解代替xml声明：
+@Aspect 注解表示这是一个切面
+@Component 表示这是一个bean,由Spring进行管理
+@Around(value = "execution(* com.how2java.service.ProductService.*(..))") 
+表示对com.how2java.service.ProductService 这个类中的所有方法进行切面操作 
+配置
+<context:component-scan base-package="com.how2java.aspect"/>
+<context:component-scan base-package="com.how2java.service"/>
+扫描包com.how2java.aspect和com.how2java.service，定位业务类和切面类
+<aop:aspectj-autoproxy/>  
+找到被注解了的切面类，进行切面配置
+
+注解test：
+1、junit-4.12.jar和hamcrest-all-1.3.jar 
+2、修改TestSpring, 并运行
+	@RunWith(SpringJUnit4ClassRunner.class) 
+	表示这是一个Spring的测试类
+
+2. @ContextConfiguration("classpath:applicationContext.xml")
+定位Spring的配置文件
+
+3. @Autowired
+给这个测试类装配Category对象
+4. @Test
+测试逻辑，打印c对象的名称 
+
+struts+hibernate
+MVC中的Model模型部分使用hibernate来做 
+MVC中的C模型部分使用struts来做 
+v为jsp
+
+1、hibernate  bean+Product.hbm.xml （映射数据库表）+hibernate.cfg.xml （密码 root 编码等）
+		+ProductDAO（增，删，修改，查询，获取全部）从SessionFactory到方法返回
+
+2、struts		web.xml （跳转拦截）+struts.xml （action声明+编码+）
+		+Action （Dao为其中子类） 
+3、.jsp显示
+
+
+Spring+Hibernate 
+DAO继承HibernateTemplate
+HibernateTemplate有setSessionFactory()
+spring获取DAO的时候，注入SessionFactory
+
+1、pojo		（bean）+ Product.hbm.xml （映射数据库表）+CategoryDAO extends HibernateTemplate
+			无hibernate.cfg.xml 放入了applicationContext.xml 
+2、Spring		applicationContext.xml 
+		内容：
+		bean声明
+		dao声明
+		LocalSessionFactoryBean
+			（有DriverManagerDataSource数据库连接+hbm.xml映射
+			+hibernateProperties（一些hibernate.cfg.xml本来的配置项）
+			如show_sql显示sql语句+hibernate.dialect（支持的数据库）+
+				 hbm2ddl.auto=update（根据model类生成表）
+		DriverManagerDataSource（密码 root 编码等）
+
+因为CategoryDAO 继承了HibernateTemplate,所以可以直接使用
+1. save 增加
+2. get 获取
+3. update 修改
+4. delete 删除 
+分页dao.findByCriteria(dc,start,count)
+总数：List<Long> l =dao.find("select count(*) from Category c"); long total = l.get(0);
+模糊查询：Hql   List<Category> cs =dao.find("from Category c where c.name like ?", "%c%");
+	Criteri	DetachedCriteria dc = DetachedCriteria.forClass(Category.class);
+       		 dc.add(Restrictions.like("name", "%分类%"));
+     		   cs =dao.findByCriteria(dc);
+c3p0数据库 <bean name="ds"  class="com.mchange.v2.c3p0.ComboPooledDataSource">
+
+
+Struts+Spring（Action生命周期由原本的Struts进行管理，交由Spring进行管理 ）
+1、struts.xml	(指定objectFactory对象工厂为spring 即action的创建交由spring进行 )
+	+ <constant name="struts.objectFactory" value="spring"/>  
+<action name="addProduct" class="productActionBean"
+声明的class名字是applicationContext.xml中的名字不是类路径 
+
+2、在WEB-INF目录下，创建文件applicationContext.xml 
+	<bean name="productActionBean" class="com.how2java.action.ProductAction">
+	只有类声明 方法声明还在struts.xml中
+3、web.xml （指定Context监听器)
+	<listener>
+ 	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	 </listener
+4、导包struts2-spring-plugin-2.2.3.1.jar 
+
+
+
+ssh
+pojo +jar +hbm +dao+DAOImpl（extends HibernateTemplate implements ProductDAO）
++ProductService+ProductServiceImpl（有对象Product）+ProductAction （有对象 ProductService ）
++struts.xml+applicationContext.xml +web.xml +jsp
+
+注struts根据listProduct创建对应的productActionBean
+ 此时productActionBean不再由Struts自己创建，而是由Spring创建
+
+单例（ Action交由Spring进行管理之后 Action是单例的）
+非单例  applicationContext.xml——bean 	+scope="prototype" 
+
+自动生成表结构
+applicationContext.xml——sessionFactory
+hbm2ddl.auto=update(自动生成表结构)+
+有的时候，会失效则+
+<property name="schemaUpdate">  
+       <value>true</value>  
+  </property>  
+
+配置事务：如增加五个产品要么都成功	（给方法加事务）
+要么都失败
+MYSQL 表的类型必须是INNODB才支持事务 
+
+1、  <tx:advice 
+2、 <aop:config 面向切片
+3、 <bean id="transactionManager
+
+execution(* com.how2java.service.*.*(..))
+包名以com.how2java.service 开头的类的任意方法
+
+事务注解
+ 1、添加<tx:annotation-driven transaction-manager="transactionManager"/> 用于进行注解扫描 
+2、方法+@Transactional(propagation=Propagation.REQUIRED,rollbackForClassName="Exception")
+
+整合注解
+1、struts2-convention-plugin-x.x.x.jar 
+2、扫描
+注解 	bean注解同上
+	dao包注解	
+			重写setSessionFactory	
+			类@Repository("productDAO")
+			@Resource(name="sf")
+	ProductServiceImpl 注解 
+			类@Service 
+			属性dao@Autowired
+1. 配置Namespace，ParentPackage，Results
+@Namespace("/")
+@ParentPackage("struts-default")
+@Results({@Result(name="listJsp", location="/list.jsp")})
+2. 使用@Autowired自动装配productService
+3. 在list()方法前加注解 @Action("listProduct")，以映射路径
+
+
+Spring MVC
+1. 用户访问 /index			导包
+2. 根据web.xml中的配置 所有的访问都会经过DispatcherServlet	implements Controller 	
+配置servlet（控制器DispatcherServlet）和映射
+
+3. 根据 根据配置文件springmvc-servlet.xml ，访问路径/index		
+WEB-INF目录+springmvc-servlet.xml （mpleUrlHandlerMapping+控制类bean）
+<prop key="/index">indexController</prop>
+表示访问路径/index会交给id=indexController（控制类bean）的bean处理
+
+注解	扫描有@Controller注解的类
+		<context:component-scan base-package="controller" />
+视图定位：预先配置jsp路径
+路径视图定位new ModelAndView("index");就可访问
+
+4. 在IndexController中指定跳转到页面index.jsp，并传递message数据
+通过 ModelAndView 对象把模型和视图结合在一起
+服务端跳转。
+ModelAndView mav = new ModelAndView("index.jsp");===跳转到index.jsp
+客户端跳转 
+new ModelAndView("redirect:/index");
+使用session)
+check(HttpSession session) 
+使用request
+upload(HttpServletRequest request
+
+注解：控制器 @Controller  @RequestMapping("/index") 路径/index会映射到该方法上
+		让IndexController实现Controller接口 
+
+5. 在index.jsp中显示message信息
+${message}
+
+接受表单数据 
+1.传参 add(Product product)
+ .jsp 提交的name和price会自动注入到参数 product
+2.jsp
+<form action="addProduct">	
+产品名称input的name要使用name(属性名字)，而不是 product.name
+ 
+中文编码
+web.xml 配置过滤器
+<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>  
+       <init-param>  
+            <param-name>encoding</param-name>  
+            <param-value>utf-8</param-value>  
+        </init-param>  
+    </filter>  
++jsp编码
+
+上传文件
+1 配置web.xml允许访问*.jpg     	是个servlet<servlet-mapping>
+springmvc的servlet路径是"/"，静态资源在默认情况下不能访问，所以要加 
+并且必须加在springmvc的servlet之前
+
+2: 配置springmvc-servlet.xml     
++<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+开放对上传功能的支持 
+
+3 upload.jsp 上传页面      
+method="post" + enctype="multipart/form-data" 
+注:<input type="file" name="image" accept="image/*" />只选择照片上传
+4. 准备UploadedImageFile     
+属性MultipartFile image（和upload.jsp中name=image一致 ）的bean 
+5: UploadController 上传控制器      
+很多且复杂 生成随机文件名+文件复制和其路径
+6: showUploadedFile.jsp 显示图片的页面      
+<img src="image/${imageName}"/>
+
+拦截器
+1.extends HandlerInterceptorAdapter类
+2.springmvc-servlet.xml+<mvc:interceptors>  
+注modelAndView.addObject（key,value）中属性${key}用
+
+
+Mybatis 
+
+1、mybatis-config.xml （数据库驱动 密码）
+2、Bean.xml 		（sql语句）
+一对多	多表联查
+resultMap		通过resultMap把数据取出来放在对应的 对象属性里
+别名	+  <id column="cid" property="id" />
+		Category的id 字段 和Product的id字段同名，Mybatis不知道谁是谁的，所以需要通过取别名cid,pid来区分
+ <collection  <!-- property: 指的是集合属性的值, ofType：指的是集合中元素的类型 -->
+
+层次结构
+<mapper namespace="com.how2java.pojo">
+	<resultMap type="Category" id="categoryBean">
+	   <collection 		
+	
+
+模糊查询where name like concat('%',#{0},'%')
+多条件 where id> #{id}  and name
+
+动态sql（xml中使用判断语句）
+	if标签 
+多字段
+
+多条件查询<where>标签会进行自动判断 +if子标签中+and活or
+如果任何条件都不成立，那么就在sql语句里就不会出现where关键字
+如果有任何条件成立，会自动去掉多出来的 and 或者 or。
+
+update语句里也会碰到多个字段相关的问题。 
+set标签：非最后一个+ ，
+
+trim 用来定制想要的功能，比如where标签就可以用
+<trim prefix="WHERE" prefixOverrides="AND |OR ">	代替where
+<trim prefix="SET" suffixOverrides=",">			代替set
+
+<choose> when otherwise=if else 
+
+foreach标签 
+
+bind标签代替模糊查询
+
+注解：@Insert（语句）
+	@Delete
+	@Select
+	@Update
+	多表联查
+	@Select	注解获取Category类本身
+	@Results 通过@Result+@Many中调用另一个表的sql语句方法相结合，来获取一对多关系
+动态sql注解
+	DynaSqlProvider类
+	@SelectProvider
+
+相关概念
+log4j和日志
+事务
+分页	 limit 语句+map返回的方法+@Param("key") 
+PageHelper是一款犀利的Mybatis分页插件
+Mybatis整合C3P0数据库 ssm有自己的方式 不用
+
+Mybatis Generator是一个用于Mybatis逆向工程的工具
+	保证数据库里有表，然后通过Mybatis Generator生成pojo, mapper和xml
+	好处:节约大家的时间，提高开发效率，降低出错几率 
+	局限：多对一，一对多需要自己手写，这个工具目前(20170828版本1.3.5)不提供 
+
+   
+ Spring+Mybatis
+
+
+pojo+mapper（增删改查等方法定义）+Bean.xml(xml的sql实现)
++applicationContext.xml （数据库的驱动，URL，账号和密码+扫描bean.XML配置文件）
+
+spring的注解测试方法
+	@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("classpath:applicationContext.xml")
+	+ @Autowired（mapper类）
+	
+ssm
+	1、jar
+	2、pojo
+	3、Mapper （接口）
+	4、Bean.xml与Mapper 同包
+	5、Service 
+	6、ServiceImpl（类注解@Service+ @Autowired mapper）
+	7、Controller（@Controller+ @Autowired Service+
+		@RequestMapping映射访问路径+返回ModelAndView ）
+
+	8、web.xml（spring的配置文件+spring mvc核心：分发servlet ） 
+	9、applicationContext.xml （src目录下 ）是Spring的配置文件
+		+注解Service+数据源（标准写法 数据库的驱动，URL，账号和密码）
+		+扫描bean.xml+扫描Mapper
+
+	数据源可配置数据库连接池
+
+	10、springMVC.xml		
+	(扫描Controller+注解驱动+ 静态页面f访问权限+视图定位（少写.jsp）)
+
+	11、jsp
+
+运行流程
+	11 jsp——8 web,xml(spring mvc的DispatcherServlet)——10 springMVC.xml
+	——7、Controller（list方法）——5 6 ServiceImp（）
+	——3 Mapper+ 4 bean.XML+2 pojo（获取数据）
+
+
+PageHelper插件分页
+
+事务 注解+applicationContext.xml配置两种
+
+ssm——JSON
+	1、使用jquery   jquery.min.js 
+	2、json中文问题  	pringMVC.xml+配置项加一些json的编码配置项
+	3、Controller 	
+		 @ResponseBody	自动转化为json格式（放到参数或者方法前）
+   		 @RequestMapping("/ submitCategory")
+	4、html 	+$.ajax({放送数据
+	5、 html   $.post收到数据
+@responseBody注解的作用是将controller的方法返回的对象通过适当的转换器转换为指定的格式之后，写入到response对象的body区，
+通常用来返回JSON数据或者是XML		
+
+Restful 风格
+既然method值如此丰富，那么就可以考虑使用同一个url，但是约定不同的method来实施不同的业务，这就是Restful的基本考虑。
+
+form的method	四种默认操作
+1、put
+2、delete
+3、get
+4、post
+步骤
+1、SpringMVC	支持put和delete的处理		同方法不同调用
+	web.xml+过滤器
+2、 <form method="post" action="../categories/${c.id}">
+	<input type="hidden" name="_method" value="PUT">
+	form的method是post, 但是springmvc看到这个_method的值是put后，会把其修改为put
+
+
+SpringBoot（简化了的、按照约定开发的SSM(H)。 ）
+插件————Spring Tool Suite（不用）
+maven 项目（Springboot就是个简单的maven 项目）
+
+最简项目
+1、Maven Project +Create a simple project 
+2、更新pom.xml
+3、+Application.java + @SpringBootApplication 
+4、@RestController =@ResponseBody+@Controller
+5、application.properties （视图重定向jsp文件）src/main/resources 目录下
+
+注意:启动类@SpringBootApplication 在项目包名下面
+
+
+
+Springboot JSP(Springboot默认视图支持是Thymeleaf)
+	
+1、pom依赖
+2、application.properties （图重定向jsp文件的位置 ）
+访问路径和端口号
+多配置文件 多个pplication.propertie用于不同环境
+有时候使用yml 格式资源配置文件
+数据库参数
+
+3、@RestController 变为@Controller
+
+
+热部署：不用关闭即可改变东西
++依赖
+
+错误处理
+1、@Controller类跑出异常+throws Exception
+2、@ControllerAdvice+ @ExceptionHandler(value = Exception.class)类
+	返回值 ModelAndView +throws Exception
+	 mav.setViewName("errorPage");————跳转到错误页面
+
+
+
+
+Java持久化规范	没有sql语句 已经默认Hibernate实现
+JPA(Java Persistence API)是Sun官方提出的Java持久化规范，用来方便大家操作数据库。
+真正干活的可能是Hibernate,TopLink等等实现了JPA规范的不同厂商,默认是Hibernate。
+1、Pom +mysql依赖+jpa依赖
+2、application.properties +数据库参数
+3、实体类+注释
+4、DAO类 extends JpaRepository<bean,Integer（主键是Integer类型。）>
+5、@Controller类+ @Autowired bean+@RequestMapping("/listCategory")方法+return "jsp"
+查询
+只要写对名字 传对参就行
+分页 	@Controller+@RequestMapping("/listCategory")+Model m,@RequestParam(value = "start", defaultValue = "0") int start,@RequestParam(value = "size", defaultValue = "5") int size) throws Exception 
+	sort排序+ start 负为0+Pageable 分页对象（包装sort和主键）
+条件查询（名字写对就行）
+
+mynatis注解方式
+1、application.properties 
+xml方式	+xml扫描
+2、pom.xml（mysql和mybatis的依赖包）
+3、bean
+4、mapper（语句+方法声明）
+xml方式	去语句+xml
+5、controller（属性mapper+Model（key+value）+返回string （jsp））
+6、jsp 使用model的
+
+
+Springboot的单元测试
+1、pom+junit依赖
+2、测试类+@RunWith(SpringRunner.class)
+	@SpringBootTest(classes = Application.class)+  @Autowired 到类;
+Springboot的文件上传
+1、jsp	action="upload" method="post" enctype="multipart/form-data"+ <input type="submit" value="上传">
+2、@Controller+ @RequestMapping(value = "/upload", method = RequestMethod.POST)+ upload方法
+	+@RequestParam("file") MultipartFile file+上传需要的代码
+3、application.properties +spring.http.multipart.maxFileSize=100Mb
+		spring.http.multipart.maxRequestSize=100Mb
+
+Restful 风格（method常用的值是get和post. 可事实上，method值还可以是put和delete等等其他值）
+1、jsp	
+方法1
+点击来改变form的method	   $("#formdelete").attr("action",href).submit();+><a class="delete" href="categories/${c.id}">
+方法1
+<input type="hidden" name="_method" value="PUT">
+
+2、Controller 
+@RequestMapper,变为 GetMapper, PutMapper	PostMapper 和 DeleteMapper 
+
+Springboot的json
+	基于Restful 风格的springboot的Json
+1、bean+@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })  
+2、@RestController 	+(@RequestBody ）(@PathVariable("id") ——可改变的参数
+
+Redis数据库 是一套 key-value 高性能数据库
+
+thymeleaf	=jsp运行之后变成HTML （区别不需要 服务端的支持）
+springboot使用
+	1、pom
+	2、 resources +目录 templates(不是在 webapp) 。html结尾
+
+	3、application.properties
+	
+内容
+	头	<html xmlns:th="http://www.thymeleaf.org">
+		引入js和css
+	BODY	<p th:text="${name}" >name</p>	取出来放进p 里，从而替换到 原来p 标签里的 4个字符 "name" .
+	字符串拼写	<p th:text="'Hello！ ' + ${name} + '!'"	or="|Hello！ ${name}!|" 
+	两种方式，一种是用加号，一种是在前后放上 ||
+
+	转义和非转义的html	<p th:text="	+<p th:utext="
+	
+	获取对象属性的两种方式text="${currentProduct.name}" or${currentProduct.getName()}" 
+	
+	显示当前对象的属性="*{name}" 	 *{} 方式
+	
+	算数运算="${currentProduct.price+999}" 
+	
+	include（页眉页脚）<div th:replace="include::footer1" ></div>
+
+条件判断	 取反	取反可以用not, 或者用th:unless.	  th:if=“${not testBoolean}" 	th:unless=“${testBoolean}" >unless 
+	三元表达式	th:text="${testBoolean}?	'当testBoolean为真的时候，显示本句话
+
+	 th:if	非Boolean	
+	1、int ！= 0  返回 true	2、Char！=0 返回 true	3、String！=flase|off|no 返回 true
+	4、不是 boolean, 数值, 字符, String 的其他类型, 返回 true	5、值是 null, 返回 false
+	
+遍历	
+
+表格<tr th:class="${status.even}?'even':'odd'" th:each="p,status: ${ps}">
++.even{
+    background-color: red;  
+}
+.odd{
+    background-color: green;
+}		奇偶变色
+
+index 属性, 0 开始的索引值
+count 属性, 1 开始的索引值
+size 属性, 集合内元素的总量
+current 属性, 当前的迭代对象
+even/odd 属性, boolean 类型的, 用来判断是否是偶数个还是奇数个
+first 属性, boolean 类型, 是否是第一个
+last 属性, boolean 类型, 是否是最后一个 
+
+<select>遍历 th:selected 表示被选中的项。
+
+<input  th:checked用于判断是否选中 
+
+内置工具
+	1、{#dates.format(now)}: 时间格式化
+	
+
+工具和中间件
+
+MAVEN	
+	pom。xml添加jar	——Dependencies——add——Enter GroupId, artifactId——输入mysql
+	——选择mysql-connector-java		注意1、Scope要选择compile 2、没有显示 点击 重建本地仓库 
+
+创建maven项目
+	菜单->File->New->Other->Maven->Maven Project
+	+默认选中的是maven-archetype-quickstart, 请修改为: maven-archetype-webapp 
+问题：没有java源代码目录+index.jsp报错
+	右键项目->属性->Java Build Path->Libraries->Edit->Workspace default JRE(jdk8)->Finish 
+
+maven父子项目	父子-聚合项目	即有一个父项目，有多个子项目。
+	1、重复的jar包	解决:都放在父包下
+步骤
+	1、<packaging>pom</packaging	 默认是 jar, 修改为pom
+	2、增加 hutool jar 包的依赖		用于后来子项目里观察对其的调用
+	3、点击项目 -> Maven -> Update Project -> OK 进行更新。 否则项目会有红点~ 
+	4、点击 parentMavenProject， 然后点击 New -> Other -> Maven -Maven Module -> Next 	子项目
+成功：	子项目的pom包 有	<parent></parent>
+	父项目pom包 有	 <modules></modules>
+
+
+web项目的调试
+	1、debug按钮+Tomcat v7.0 Server at localhost 
+多控制台输出
+	新建控制台+切换
+
+github
+导入项目	1、导入项目 菜单-File->import->Git->Projects from Git 
+	2、选择Clone URI 
+	3、输入git参数（只要URI输入了地址，后面两个参数就会自动生成）
+	4、申请的账号和密码		Store in Secure Store勾
+	5、是否提供密码提示 --选no
+分享项目
+	1、登陆github.com
+	2、账号左边的加号，点击New repository
+	3、仓库名称helloworld	不要选 Initialize this repository with a README
+	4、创建成功，得到git地址 
+	5、右键项目->Team->Share Project
+	6、配置仓库，点击一下 Use or create repository in parent folder of project 
+	7、右键项目->Team->Commit 
+	8、设置git参数 
+
+nginx	运行多个tomcat（负载均衡）
+
+	Nginx配合Tomcat来协同工作	不能作为Servlet 容器独立运行
+正向代理 	（翻墙软件）	换个网址
+反向代理	请求给服务器	服务器接收传递消息
+1、nginx把请求交给tomcat来做
+	方法：修改nginx.conf 	意义:nginx在处理静态文件的吞吐量上面比tomcat好很多	达到动静分离的效果
+
+动静分离
+	css, js之类的都交给nginx来处理，nginx处理不了的，比如jsp 就交给tomcat来处理~
+	方法：修改nginx.conf 
+
+
+部署到Linux
+
+服务器有两种平台可供考虑，Windows或者Linux。
+Linux服务器提供厂商有很多，比如阿里云，腾讯云，亚马逊云以及其他各种乱七八糟的各种云。
+
+1、购买服务器
+2、securityCRT 管理云服务器
+3、服务器命令===Linux命令
+4、ftp服务器了。 ftp的全称是 File Transfer Protocol ： 文件传输协议。 yum install vsftpd -y
+5、linux创建用户和权限限制
+6、处理鉴权问题（）--访问系统的权利
+7、开放更多端口
+8、ftprush 用户远程登录
+9、安装java
+10、安装mysql+设置密码（默认无密码）
+11、tomcat安装+开放8080端口+修改配置path（）
+12、解压上传项目压缩包+mysql大小写敏感问题+mysql控制台导入msql文件
+13、自启动（跟随服务器启动而启动）	脚本（shell）启动 tomcat+服务启动vsftpd 和 mysql
+
+ Maven 项目
+1、Maven  install=war文件
+ 直接把war 上传到tomcat/webapps下，tomcat就会自动解压了
+把war用解压软件打开，当作一个普通j2ee应用，按照前面上传 教程的做法上传上去
+
+
+linux常用操作
+1、目录	cd  /name（非user 有usr 根目录为/   只有cd 进入home目录）+pwd（当前目录）+mkdir -p（空格）/(name)创建		
+2、查询所有   ls（目录和文件）	ls -lh/l（所有文件信息 只有-l或者-sh都可以）权限 所属用户 创建日期 大小
+3、文件cp  a b  （a复制到b）tar xzf （解压） mor file（文件更多信息）rm文件 rm -r目录
+4、用户 su（用户name）切换到root用户 
+5、文本 touch name.txt(创建文件) +编辑vi name.txt 	+a/i+(退出)ESC+shift+；+wq（保存）+q！（不保存）
+
+  
+webSocket（webhook+HTTP Streaming）	消息中间件
+要求：tomcat：7.0.47以上
+1、导包+web-lnf/lib
+2、@ServerEndpoint("/路径类")		websocket服务器端
+3、ServerManager			线程安全的集合servers
+4、@WebServlet(name="*DataCenter",urlPatterns = "/*Center",loadOnStartup=1) //自启动+实现了Runnable的run（隔几秒刷新）+ServerManager广播
+5、index.jsp			javascrip--判断浏览器是否支持+websocket.onmessage 接收ws://ip:端口//项目名（非包名字 区分大小写）*/路径类
+
+情况1、structs	+去拦截
+情况2、nginx	+配置
+
+
+qrCode	二维码
+1、Java生成和解析二维码	照片
+2、javascript创建二维码图片	导包=导js.min	$('').qrcode
+
+
+
+Lucene 搜索引擎+	Solr服务器	+ElasticSearch  
+1、导包（Lucene +IKAnalyzer）
+2、分词器+创建索引+创建查询器 +执行搜索 =搜索结果 ScoreDoc
+
+与like相比
+建立一次索引，进行多次查询 第一次时间长 然后就短了 结果会有匹配得分
+
+概念：分词器：将要搜索的字符串拆分为不同关键字 	护眼带光源——》 护眼，带，光源 3个关键字
+        Lucene 高亮显示 匹配到的词会高亮	返回为html红色字体文件
+
+Solr相当于一个数据库的话，
+Core就相当于一张表 
+字段为数据
+1、下载+解压+运行
+2、命令行新建core
+3、Solr+IKAnalyze中文分词的配置项（新建了一个能才存放中文的类型）+重启 Solr 
+4、core设置字段，用于存放数据 （类型为中文字段类型+id默认存在）
+5、SolrJ，使用 Java 语言来把数据加入到索引里。
+
+ElasticSearch  Lucene进行了封装
++kibana控制台工具
+
+springboot +elasticsearch +=spring-data-elasticsearch
+1、创建springboot项目
+2、pom.xml +=spring-data-elasticsearch 的jar包
+3、mode+=@Document(indexName = "how2java=数据库",type = "category=表")
+4、dao+= extends ElasticsearchRepository
+5、控制类 Controller+jsp
+6、application.properties 
+配置 jsp 作为视图
+配置spring端口 为8080
+配置 elastic链接地址为 127.0.0.1:9300 
+
+
+
+Quartz 定时器	
+概念：
+触发器 Trigger： 什么时候工作
+任务 Job: 做什么工作
+调度器 Scheduler: 搭配 Trigger和Job
+1、新建调度器Scheduler:
+2、定义触发器：	名称和组+间隔时间+执行次数
+4、定义 JobDetail 	 名称和分组+属性
+5、  scheduler.scheduleJob(job, trigger);
+6、调度加入这个job+scheduler.start();启动scheduler.shutdown(true);关闭
+
+分组的意义：不同类型的操作分组
+
+job组成部分
+JobDetail: 用于描述这个Job是做什么的
+实现Job的类: 具体干活的
+JobDataMap: 给 Job 提供参数用的
+Job 的并发 
+@DisallowConcurrentExecution	+同步锁
+可以中断的job  implements InterruptableJob 
+
+Trigger 触发器
+SimpleTrigger =CronTrigger （Linux下的一个定时器）
+	指定什么时间开始触发，触发多少次，每隔多久触发一次.
+	
+job监听器	implements JobListener 
+
+区别：默认存在内存，重启后消失
++JDBCStore 在数据库中 不消失
+
+Quartz集群	避免服务器节点坏死
+
+Shiro	是当下常见的安全框架，主要用于用户验证和授权操作
+
+配置方式
+1、基于ini配置文件
+	思路：读取配置文件获取SecurityManager得到Subject
+	以Subject查看用户权限和登录状态+拥有的角色
+2、使用数据库+加密
+	思路：前提:创建库shiro-用户user-角色role-权限permission
+		-用户+角色user_role-角色+权限role_permission
+		+Dao类
+使用数据库	修改 shiro.ini（让Realm去找认证类）+认证类(使用Dao extends AuthorizingRealm )
+加密 		用户密码	Md5Hash（md5加密）+盐（随机数）+加密次数
+		+存放盐salt字段到user表下面
+
+Realm  真正进行用户认证和授权的关键地方
+	得到 Shiro 给的用户和密码后，有可能去找 ini 文件，也可以去找数据库
+
+框架使用
+1、Servlet使用
+2、ssm使用	url灵活配置（优先）PathMatchingFilter+applicationContext-shiro.xml 
+		注解@RequiresRoles("admin") " 
+		+逆向工程
+3、springboot使用 （最好用）
+	
+ filterChainDefinitionMap.put("/login", "anon");说明
+anon	匿名拦截器，即不需要登录即可访问；一般用于静态资源过滤；示例“/static/**=anon”
+https://www.jianshu.com/p/054c925cd45d
+
+Linux虚拟机
+1、连接网络
+	
+固定ip：默认：每次启动都会换一个ip通过 ip address 知道
+https://how2j.cn/k/vmware/vmware-ip/2020.html
+
+2、虚拟机随电脑启动
+
+防火墙（控制端口）	运行那些端口开放给访问者用，哪些不开放~
+
+安装工具	yum install iproute ftp bind-utils net-tools wget -y
+
+
+Docker容器	linux里面装的小linux
+
+Docker 里面这个，已经有环境，已经装好了J2EE应用，已经确保可以用的 "Linux 操作系统”
+1、yun 安装和启动Docker 
+2、改变dns（域名服务器）
+3、拉取镜像 hub.docker.com 
+
+项目到docker本地和仓库
+
+
+消息中间件服务器----本质是服务器
+消息中间件有很多种，如 activemq, rabbitmq 
+
+Broker是实现ActiveMQ功能		类似于e4的事件本地传输消息
+这与常规ActiveMQ安装，处理消息功能一样，只是不需安装ActiveMQ,而是在代码中内嵌实现其功能。
+springboot与ActiveMQ整合	https://www.cnblogs.com/elvinle/p/8457596.html
+
+前提：ActiveMQ 
+1、安装客户端 运行activemq.bat 
+2、访问地址 http://127.0.0.1:8161/ 
+3、管理界面 进入管理界面
+
+模式	
+队列模式---许多条消息--一人一条			消息数量一定，需要争抢
+主题模式--	多条消息--每人多条				消息数量=主题*用户
+
+使用代码
+1、pom.xml 	activemq  hutool jar
+2、ActiveMQUtil 	工具类，用于判断 activemq 服务器是否启动
+3、生产者（发送服务器）		创建消息+发送消息（100）
+4、消费者				监听器+接收消息
+
+spring 模式使用 activeMQ		（默认多一个spring的消费者）
+1、pom.xml 引入 activemq, spring , junit ,hutool 等等
+2、spring_jms.xml   activemq 的相关配置			--进行模式切换 
+3、@ContextConfiguration(locations="classpath:spring_jms.xml")
+
+ rabbitmq 也是一种 消息中间件的实现。与之的区别在于， rabbitmq 更专业，更灵活
+安装
+1、exe----erlang+rabbitmq
+2、系统变量 -> Path 
+3、 cmd, 接着运行 er
+4、rabbitmq配置插件
+5、重启 rabbitmq （管理员运行）
+6、rabbitmq 也有一个 管理界面
+
+AMQP 协议
+RabbitMQ提供了四种Exchange交换机模式：
+
+fanout广播模式~ 消息来了，会发给所有的队列~ 
+direct,列模式， 消息来了，只发给指定的 Queue, 其他Queue 都收不到
+topic,主题模式
+header 
+
+使用代码：
+1、pom.xml 	rabbitmq和hutool的jar 
+2、RabbitMQUtil  判断服务器是否启动 
+3、雷同ActiveMQ
+
+Springcloud 分布式和集群
+一套工具 分布式+集群的系统
+
+概念：1、单体架构	一个应用所有功能 	
+好处：开发，测试，部署也很方便
+缺点：不能高访问，高并发	耦合 不易修改
+
+
+
+springboot改造 Springcloud 
+springboot部分
+1、pom.xml
+2、指定端口
+3、bean
+4、Service +@Service
+5、Controller +@Controller+ @Autowired Service+ @RequestMapping("/path")
+6、.html 
+7、application.properties 	thymeleaf 的相关配置  th标签
+
+微服务（分布式）
+一个springboot 项目提供一个服务（数据微服务，视图微服务）
+ eureka serve（springcloud ） 		服务注册 （微服务之间通信）
+ 视图微服务 通过注册中心定位并访问 数据微服务
+
+集群：多个springboot,功能一模一样（端口不一样）
+高可用：端口，如果 8001 挂了，还有 8002 继续提供微服务
+高性能：多个端口获取数据-快
+
+Springcloud 使用
+
+服务注册中心项目
+1、maven父子项目
+	pom：父：springboot 版本+ hutool 工具类+org.springframework.cloud
+		子：spring-cloud-starter-netflix-eureka-server jar 
+2、@SpringBootApplication+@EnableEurekaServer启动
+注：NetUtil 是 Hutool 的工具判断端口是否占用
+3、application.yml 
+eureka 的相关信息。
+4、注册中心的管理界面：运行 EurekaServerApplication，并访问：http://127.0.0.1:8761/
+（没有端口服务）
+
+数据服务项目
+1、pom.xml 	spring-boot-starter-web: 表示这是个web服务，会提供控制层 
+		spring-cloud-starter-netflix-eureka-client 表示这是个 eureka 客户端。
+2、实体类+@Service 端口号 放进了产品信息（ @Value("${server.port} String port;等")）
+3、@RestController+  @Autowired  集合转换成 json 数组。（ @RequestMapping("/products")）
+4、启动类  输入端口号来布置服务器
+5、application.yml 
+6、册中心的管理界面（有了端口服务）+ 访问http://127.0.0.1:8001/路径 获取数据（和注册中心无关 就是个网页）
+
+
+视图微服务项目
+Feign/Ribbon 访问注册好的数据微服务(客户端负载均衡)
+1、pom
+spring-cloud-starter-netflix-eureka-client: eureka 客户端
+spring-boot-starter-web： springmvc
+spring-boot-starter-thymeleaf： thymeleaf 做服务端渲染
+
+2、实体类+Ribbon 客户端 类（@Component）+服务类 
+3、控制器 
+4、.html +application.yml 
+5、启动类 （ @EnableDiscoveryClient）
+
+ restTemplate 这个工具来做负载均衡
+  @Bean
+    @LoadBalanced
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+ zipkin 的jar包 调用追踪
+	导包+加配置
+
+服务器配置项目+客户端显示
+服务器配置（修改配置信息）	修改git= 所有微服务都立即获取相应信息了
+ConfigServer +git存放 version信息
+1、 spring-cloud-config-server
+2、 @EnableConfigServer 配置服务器
+3、application.yml 
+客户端
+1、spring-cloud-starter-config 
+2、bootstrap.yml 
+3、@Value("${version}")+@Controller
+4、必须重启 ConfigServerApplication 和 ProductViewServiceFeignApplication 
+
+rabbitMQ 来进行消息广播
+1、客户端+多了spring-boot-starter-actuator 用于访问路径：/actuator/bus-refresh
+	多了spring-cloud-starter-bus-amqp 用于支持 rabbitmq 
+
+2、bootstrap.yml 修改
+3、application.yml 	修改
+4、FreshConfigUtil post 的方式访问
+5、 Zipkin 的时候 带一个参数	支持了 rabbitMQ
+
+服务器再见	断路器
+当被访问的微服务无法使用的时候 服务能够感知这个现象，并且提供一个备用的方案出来
+
+对象：视图服务+ product-view-service-feign
+1、pom  jar spring-cloud-starter-netflix-hystrix 
+2、@FeignClient(value = "PRODUCT-DATA-SERVICE")
+	@FeignClient(value = "PRODUCT-DATA-SERVICE",fallback = ProductClientFeignHystrix.class)
+这就表示，如果访问的 PRODUCT-DATA-SERVICE 不可用的话，就调用 ProductClientFeignHystrix 来进行反馈信息。
+3、ProductClientFeignHystrix 类的实现
+4、application.yml 
+
+断路器监控多个	集群层面进行监控
+springCloud 提供了一个 turbine 项目
+
+
+数据库
+oracle
+pl-sql deverloper 
+
+
+ssl（https）
+避免被http劫持
+1、申请https证书
+nginx和 tomcat的ssl 配置
+2、  WebSocket 是走 ws:// 协议    ws:// 协议修改成 wss:// 
