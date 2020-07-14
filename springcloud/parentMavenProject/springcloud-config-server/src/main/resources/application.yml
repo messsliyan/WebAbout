@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: springcloud-config-server
+  cloud:
+    config:
+      label: master
+      server:
+        git:
+          uri: https://github.com/messsliyan/LIJIABINDEGIT/
+          searchPaths: src/main/resources
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
